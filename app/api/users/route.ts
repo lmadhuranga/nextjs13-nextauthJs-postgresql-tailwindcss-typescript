@@ -2,8 +2,9 @@
 import { prisma } from '@/lib/prisma';
 import { type NextRequest, NextResponse } from 'next/server'
 
-export async function GET(request: NextRequest) {
+export async function GET(request: NextRequest, { id }: any) {
     try {
+        console.log(`user id`, id);
         const { searchParams } = new URL(request.url);
         const pageSize = 10;
         const currentPage = parseInt(searchParams.get('page') as string) || 1;
@@ -24,7 +25,7 @@ export async function GET(request: NextRequest) {
             totalUsers,
         };
 
-        return  NextResponse.json({ users, pagination: paginationInfo }, {
+        return NextResponse.json({ users, pagination: paginationInfo }, {
             status: 200,
             // headers: { referer: referer },
         })

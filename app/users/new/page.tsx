@@ -4,8 +4,20 @@ import { useEffect, useState } from 'react';
 
 const roles = ['user', 'admin']; // Sample roles for the dropdown
 
-async function getUser(id: string) {
-  const res = await fetch(`/api/users/${id}`);
+interface UserData {
+  name: string;
+  email: string;
+  role: string;
+}
+
+async function newUser(data: UserData) {
+  const res = await fetch(`/api/users/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
 
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
@@ -14,11 +26,7 @@ async function getUser(id: string) {
   return res.json()
 }
 
-interface UserData {
-  name: string;
-  email: string;
-  role: string;
-}
+
 
 export default function Page({ params: { id } }: { params: { id: string } }) {
 
@@ -29,18 +37,6 @@ export default function Page({ params: { id } }: { params: { id: string } }) {
     password: '',
   });
 
-  useEffect(() => {
-    const user = getUser(id);
-    user.then(({ user: { name, email, role } }: { user: UserData }) => {
-      setFormData({
-        name,
-        email,
-        role,
-        password: '',
-      });
-    });
-  }, [])
-
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -49,17 +45,10 @@ export default function Page({ params: { id } }: { params: { id: string } }) {
     }));
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit  = async (e: any) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
-
-    // Reset form fields
-    // setFormData({
-    //   name,
-    //   email,
-    //   role,
-    //   password: '',
-    // });
+    const user = await newUser(formData);
   };
 
   return (

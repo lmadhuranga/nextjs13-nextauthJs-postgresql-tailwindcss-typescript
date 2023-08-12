@@ -1,10 +1,10 @@
 
 import { prisma } from '@/lib/prisma';
+import { NextApiRequest } from 'next';
 import { type NextRequest, NextResponse } from 'next/server'
 
-export async function GET(request: NextRequest, { id }: any) {
+export async function GET(request: NextRequest) {
     try {
-        console.log(`user id`, id);
         const { searchParams } = new URL(request.url);
         const pageSize = 10;
         const currentPage = parseInt(searchParams.get('page') as string) || 1;
@@ -15,7 +15,7 @@ export async function GET(request: NextRequest, { id }: any) {
             skip,
             take: pageSize,
         });
-
+        
         const totalUsers = await prisma.user.count();
         const totalPages = Math.ceil(totalUsers / pageSize);
 
@@ -26,6 +26,33 @@ export async function GET(request: NextRequest, { id }: any) {
         };
 
         return NextResponse.json({ users, pagination: paginationInfo }, {
+            status: 200,
+            // headers: { referer: referer },
+        })
+    } catch (error) {
+        console.error(error);
+        return NextResponse.json({ message: 'Server error' }, {
+            status: 500,
+            // headers: { referer: referer },
+        })
+    }
+
+}
+
+export async function POST(request: NextRequest) {
+    const { email, password, name, role } = await request.json();
+
+    try {
+        const user = await prisma.user.create({
+            data: {
+                email,
+                password,
+                name,
+                role,
+            },
+        });
+
+        return NextResponse.json({ user }, {
             status: 200,
             // headers: { referer: referer },
         })

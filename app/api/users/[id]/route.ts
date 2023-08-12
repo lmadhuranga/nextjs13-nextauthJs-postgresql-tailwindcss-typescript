@@ -2,11 +2,12 @@
 import { prisma } from '@/lib/prisma';
 import { type NextRequest, NextResponse } from 'next/server'
 
-export async function GET(request: NextRequest, { params: { id } }: { params: { id: number } }) {
+export async function GET(request: NextRequest, { params: { id } }: { params: { id: string } }) {
+    const userId = parseInt(id, 10);
     try {
         const user = await prisma.user.findFirst({
             where: {
-                id: id
+                id:userId
             },
             select: {
                 email: true,

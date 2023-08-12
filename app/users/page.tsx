@@ -1,11 +1,10 @@
 import Link from "next/link";
 
-async function getUsers() {
-  const res = await fetch('http://localhost:3000/api/users?page=1')
+async function getUsers(page: number = 1) {
+  const res = await fetch(`${process.env.BASE_URL}/api/users?page=${page}`)
   if (!res.ok) {
     throw new Error('Failed to fetch data')
   }
-
   return res.json()
 }
 
@@ -29,11 +28,12 @@ export default async function Page() {
         <Link href={`/users/delete/${id}`}> Delete</Link>
       </td>
     </tr>
-  )); 
-  
+  ));
+
   return (
     <>
       <h1>User List</h1>
+      <Link href={`/users/new`}>New</Link>
       <table className="table-auto">
         <thead>
           <tr>

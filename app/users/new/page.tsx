@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-const roles = ['user', 'admin']; // Sample roles for the dropdown
+const roles = ['user', 'admin'];
 
 interface UserData {
   name: string;
@@ -20,7 +20,6 @@ async function newUser(data: UserData) {
   });
 
   if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
     throw new Error('Failed to fetch data')
   }
   return res.json()

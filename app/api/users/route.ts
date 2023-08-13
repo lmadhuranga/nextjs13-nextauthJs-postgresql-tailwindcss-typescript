@@ -27,7 +27,7 @@ export async function GET(request: NextRequest) {
 
         return NextResponse.json({ users, pagination: paginationInfo }, {
             status: 200,
-        })
+        });
     } catch (error) {
         console.error(error);
         return NextResponse.json({ message: 'Server error' }, {

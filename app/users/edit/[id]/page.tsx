@@ -2,13 +2,13 @@
 
 import { useEffect, useState } from 'react';
 
-const roles = ['user', 'admin']; // Sample roles for the dropdown
+const roles = ['user', 'admin'];
 
 async function getUser(id: string) {
   const res = await fetch(`/api/users/${id}`);
 
   if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
+    // Todo:: Add errorBoundry
     throw new Error('Failed to fetch data')
   }
   return res.json()
@@ -24,7 +24,6 @@ async function updateUser(id: string, data: UserData) {
   });
 
   if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
     throw new Error('Failed to fetch data')
   }
   return res.json()

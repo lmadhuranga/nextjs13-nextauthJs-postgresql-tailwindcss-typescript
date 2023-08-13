@@ -14,6 +14,22 @@ async function getUser(id: string) {
   return res.json()
 }
 
+async function updateUser(id: string, data: UserData) {
+  const res = await fetch(`/api/users/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error('Failed to fetch data')
+  }
+  return res.json()
+}
+
 interface UserData {
   name: string;
   email: string;
@@ -49,17 +65,11 @@ export default function Page({ params: { id } }: { params: { id: string } }) {
     }));
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
-
-    // Reset form fields
-    // setFormData({
-    //   name,
-    //   email,
-    //   role,
-    //   password: '',
-    // });
+    const updatedUser = await updateUser(id, formData);
+    // Todo:: redirect to list page
   };
 
   return (

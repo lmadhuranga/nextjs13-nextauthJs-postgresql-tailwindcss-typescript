@@ -1,7 +1,9 @@
 import Link from "next/link";
 
 async function getUser(id: string) {
-  const res = await fetch(`${process.env.BASE_URL}/api/users/${id}`);
+  const res = await fetch(
+    `${process.env.BASE_URL}/api/users/${id}`,
+  );
 
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
@@ -9,15 +11,10 @@ async function getUser(id: string) {
   }
   return res.json()
 }
-
-interface UserData {
-  name: string;
-  email: string;
-  role: string;
-}
-
+ 
 export default async function Page({ params: { id } }: { params: { id: string } }) {
 
+  const { user  }: { user: UserData } = await getUser(id);
   const { user: { name, email, role } }: { user: UserData } = await getUser(id);
   
   return (

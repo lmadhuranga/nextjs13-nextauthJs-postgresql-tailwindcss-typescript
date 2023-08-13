@@ -8,7 +8,12 @@ async function getUsers(page: number = 1) {
   if (!res.ok) {
     throw new Error('Failed to fetch data')
   }
-  return res.json()
+  return res.json();
+}
+
+
+function onDeleteHandler(id: number) {
+  console.log(`Delete user `, id);
 }
 
 interface UserData {
@@ -18,8 +23,18 @@ interface UserData {
   role: string;
 }
 
-export default async function Page() {
-  const { users } = await getUsers();
+export default async function Page({ searchParams: { page } }: { searchParams: { page: number } }) {
+  const { users, pagination: { currentPage, totalPages, totalUsers } } = await getUsers(page);
+
+  const paginationLinks = [];
+  for (let i = 1; i <= totalPages; i++) {
+    paginationLinks.push(
+      <Link href={`/users?page=${i}`} key={i}>
+        {' '}{i}{' '}
+      </Link>
+    );
+  }
+
   const usersData = users.map(({ id, name, email, role }: UserData) => {
     return (
       <tr key={id}>
@@ -51,6 +66,9 @@ export default async function Page() {
           {usersData}
         </tbody>
       </table>
+      <div>
+        {paginationLinks}
+      </div>
     </>
   );
 }

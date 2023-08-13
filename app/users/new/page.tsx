@@ -27,8 +27,7 @@ async function newUser(data: UserData) {
 }
 
 
-
-export default function Page({ params: { id } }: { params: { id: string } }) {
+export default function Page() {
 
   const [formData, setFormData] = useState({
     name: '',
@@ -76,7 +75,7 @@ export default function Page({ params: { id } }: { params: { id: string } }) {
           <label>Password:</label>
           <input type="password" name="password" value={formData.password} onChange={handleChange} />
         </div>
-        <button type="submit">Update User</button>
+        <button type="submit">New User</button>
       </form>
     </>
   )

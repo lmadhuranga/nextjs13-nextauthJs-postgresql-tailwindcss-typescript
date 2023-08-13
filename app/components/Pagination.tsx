@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { redirect } from "next/navigation";
 
 interface PaginationProps {
     currentPage: number;
@@ -12,7 +13,7 @@ interface PaginationProps {
 const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages }) => {
     const handlePageChange = (newPage: number) => {
         if (newPage >= 1 && newPage <= totalPages) {
-            window.location.href = `/users?page=${newPage}`;
+            redirect(`/users?page=${newPage}`)
         }
     };
 

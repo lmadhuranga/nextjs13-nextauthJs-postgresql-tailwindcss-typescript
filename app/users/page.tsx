@@ -27,9 +27,9 @@ export default function Page({ searchParams: { page } }: { searchParams: { page:
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(0);
   // const [totalUsers, setTotalUsers] = useState<number>(0);
-  
+
   useEffect(() => {
-    if(page>0) {
+    if (page > 0) {
       setCurrentPage(page);
     }
 
@@ -54,13 +54,13 @@ export default function Page({ searchParams: { page } }: { searchParams: { page:
   const renderedUsers = usersData.map(({ id, name, email, role }: UserData) => {
     return (
       <tr key={id}>
-        <td>{name}</td>
-        <td>{email}</td>
-        <td>{role}</td>
-        <td>
-          <Link href={`/users/view/${id}`}>View </Link> |{' '}
-          <Link href={`/users/edit/${id}`}> Update </Link> |{' '}
-          <button onClick={() => onDeleteHandler(id)}>Delete</button>
+        <td className="border px-4 py-2">{name}</td>
+        <td className="border px-4 py-2">{email}</td>
+        <td className="border px-4 py-2">{role}</td>
+        <td className="border px-4 py-2">
+          <Link href={`/users/view/${id}`} className="text-blue-500">View</Link> |
+          <Link href={`/users/edit/${id}`} className="text-green-500 ml-2"> Update </Link> |
+          <button onClick={() => onDeleteHandler(id)} className="text-red-500 ml-2">Delete</button>
         </td>
       </tr>
     );
@@ -68,22 +68,26 @@ export default function Page({ searchParams: { page } }: { searchParams: { page:
 
   return (
     <>
-      <h1>User List</h1>
-      <Link href={`/users/new`}>New</Link>
-      <table className="table-auto">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {renderedUsers}
-        </tbody>
-      </table>
-      <Pagination currentPage={currentPage} totalPages={totalPages} />
+      <div className="p-4">
+        <h1 className="text-3xl font-bold underline">User List</h1>
+        <Link href={`/users/new`} className="text-green-500 mb-4 inline-block">New</Link>
+        <table className="table-auto w-full">
+          <thead>
+            <tr>
+              <th className="px-4 py-2">Name</th>
+              <th className="px-4 py-2">Email</th>
+              <th className="px-4 py-2">Role</th>
+              <th className="px-4 py-2">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {renderedUsers}
+          </tbody>
+        </table>
+        <div className="flex justify-start mt-4">
+          <Pagination currentPage={currentPage} totalPages={totalPages} />
+        </div>
+      </div>
     </>
   );
 }

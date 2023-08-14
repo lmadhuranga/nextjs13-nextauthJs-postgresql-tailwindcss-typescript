@@ -3,6 +3,7 @@ import Link from "next/link";
 async function getUser(id: string) {
   const res = await fetch(
     `${process.env.BASE_URL}/api/users/${id}`,
+    { cache: 'no-store' }
   );
 
   if (!res.ok) {
@@ -11,12 +12,12 @@ async function getUser(id: string) {
   }
   return res.json()
 }
- 
+
 export default async function Page({ params: { id } }: { params: { id: string } }) {
 
-  const { user  }: { user: UserData } = await getUser(id);
+  const { user }: { user: UserData } = await getUser(id);
   const { user: { name, email, role } }: { user: UserData } = await getUser(id);
-  
+
   return (
     <>
       <div>My User id: {id}</div>

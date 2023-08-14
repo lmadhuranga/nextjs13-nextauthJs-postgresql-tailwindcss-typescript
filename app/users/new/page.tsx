@@ -1,5 +1,6 @@
 'use client'
 
+import { redirect } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 const roles = ['user', 'admin'];
@@ -43,10 +44,12 @@ export default function Page() {
     }));
   };
 
-  const handleSubmit  = async (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     // console.log('Form submitted:', formData);
-    const user = await newUser(formData);
+    const { user: { id } } = await newUser(formData);
+    console.log(`******user`, id);
+    window.location.href = `/users/view/${id}`;
   };
 
   return (

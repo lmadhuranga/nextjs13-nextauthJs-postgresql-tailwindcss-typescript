@@ -42,7 +42,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
     const session = await getServerSession(authOptions)
     // console.log(`**************** put session`,session?.user?.role, session);
-    if(!session || session?.user?.role!=='admin') {
+    if (!session || session?.user?.role !== 'admin') {
         return NextResponse.json({ user: 'Unauthorized' }, {
             status: 401,
         });
@@ -61,7 +61,7 @@ export async function POST(request: NextRequest) {
             },
         });
 
-        return NextResponse.json({ user: newUser }, {
+        return NextResponse.json({ user: { ...newUser, password: '' } }, {
             status: 200,
         });
     } catch (error) {

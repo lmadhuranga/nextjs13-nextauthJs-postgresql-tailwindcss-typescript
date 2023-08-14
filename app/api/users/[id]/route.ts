@@ -1,12 +1,12 @@
 
 import { prisma } from '@/lib/prisma';
-import { type NextRequest, NextResponse } from 'next/server' 
+import { type NextRequest, NextResponse } from 'next/server'
 import { NextApiRequest, NextApiResponse } from 'next';
 import { authOptions } from '../../auth/[...nextauth]/route';
-import { getServerSession } from 'next-auth' 
+import { getServerSession } from 'next-auth'
 
 export async function GET(request: NextRequest, { params: { id } }: { params: { id: string } }) {
-    
+
     const userId = parseInt(id, 10);
     try {
         const user = await prisma.user.findUnique({
@@ -46,7 +46,7 @@ export async function PUT(request: NextRequest, { params: { id } }: { params: { 
     //         status: 401,
     //     });
     // }
-    
+
     const userId = parseInt(id, 10);
     try {
         const formData = await request.json();
@@ -88,7 +88,7 @@ export async function PUT(request: NextRequest, { params: { id } }: { params: { 
             }
         });
 
-        return NextResponse.json({ user: updatedUser }, {
+        return NextResponse.json({ user: { ...updatedUser, password: '' } }, {
             status: 200,
         });
     } catch (error) {

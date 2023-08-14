@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 const roles = ['user', 'admin'];
 
 async function getUser(id: string) {
-  const res = await fetch(`/api/users/${id}`);
+  const res = await fetch(`/api/users/${id}`, { cache: 'no-store' });
 
   if (!res.ok) {
     // Todo:: Add errorBoundry
@@ -17,9 +17,6 @@ async function getUser(id: string) {
 async function updateUser(id: string, data: UserData) {
   const res = await fetch(`/api/users/${id}`, {
     method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
     body: JSON.stringify(data),
   });
 
@@ -67,8 +64,8 @@ export default function Page({ params: { id } }: { params: { id: string } }) {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     // console.log('Form submitted:', formData);
-    const updatedUser = await updateUser(id, formData);
-    // Todo:: redirect to list page
+    const userData = await updateUser(id, formData);
+    window.location.href = `/users/view/${id}`;
   };
 
   return (

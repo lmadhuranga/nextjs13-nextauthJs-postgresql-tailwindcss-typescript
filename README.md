@@ -15,3 +15,8 @@ pnpm dev
 -- 1.Error boundry implementation 
 -- 2. Loading screens
 -- 3.Remove console logs
+
+
+Admin user detail
+email: test@test.com
+password : test

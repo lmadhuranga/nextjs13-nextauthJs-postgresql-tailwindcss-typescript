@@ -12,7 +12,18 @@ First, run the development server:
   
 
 ```bash
+# Need to install the package 
+yarn
+
+# configure the progress database with enviorament file
+
+# run prisma to migrate the data base
+
+# run the project 
 yarn  dev
+
+#  Goto http://localhost:3000/
+
  
 ```
 

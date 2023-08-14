@@ -94,7 +94,7 @@ export default function Page({ params: { id } }: { params: { id: string } }) {
             <label className="block text-gray-700 font-semibold mb-2">Password:</label>
             <input className="w-full px-3 py-2 border rounded" type="password" name="password" value={formData.password} onChange={handleChange} />
           </div>
-          <button type="submit">Update User</button>
+          <button type="submit" className="bg-green-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Update User</button>
         </form>
       </div>
     </>

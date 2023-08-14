@@ -12,9 +12,15 @@ export default async function EditLayout({
   console.log(`session+++++++++++++`, session);
   return (
     <section>
-      <nav>
-        {session===null ? <LoginButton /> : <LogoutButton />}
-        <Link href={'/users'}>Users</Link>
+      <nav className="bg-blue-500 p-4 flex justify-between items-center">
+        <div>
+          <Link href={"/users"} className="text-white font-semibold">
+            Users
+          </Link>
+        </div>
+        <div>
+          {session === null ? <LoginButton /> : <LogoutButton />}
+        </div>
       </nav>
       {children}
     </section>

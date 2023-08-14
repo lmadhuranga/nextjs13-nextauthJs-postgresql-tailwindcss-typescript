@@ -20,11 +20,13 @@ export default async function Page({ params: { id } }: { params: { id: string } 
 
   return (
     <>
-      <div>My User id: {id}</div>
-      <div>Name: {name}</div>
-      <div>Email: {email}</div>
-      <div>Role: {role}</div>
-      <Link href={`/users`}>Back</Link>
+     <div className="p-4">
+      <div className="text-2xl font-semibold mb-2">User Details for ID: {id}</div>
+      <div className="mb-2"><span className="font-semibold">Name:</span> {name}</div>
+      <div className="mb-2"><span className="font-semibold">Email:</span> {email}</div>
+      <div className="mb-2"><span className="font-semibold">Role:</span> {role}</div>
+      <Link href={`/users`} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Back</Link>
+    </div>
     </>
   );
 }

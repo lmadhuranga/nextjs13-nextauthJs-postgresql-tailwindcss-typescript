@@ -54,31 +54,33 @@ export default function Page() {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Name:</label>
-          <input type="text" name="name" value={formData.name} onChange={handleChange} />
-        </div>
-        <div>
-          <label>Email:</label>
-          <input type="email" name="email" value={formData.email} onChange={handleChange} />
-        </div>
-        <div>
-          <label>Role:</label>
-          <select name="role" value={formData.role} onChange={handleChange}>
-            {roles.map((r) => (
-              <option key={r} value={r}>
-                {r}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label>Password:</label>
-          <input type="password" name="password" value={formData.password} onChange={handleChange} />
-        </div>
-        <button type="submit">New User</button>
-      </form>
+      <div className="p-4">
+        <form onSubmit={handleSubmit} className="max-w-md mx-auto bg-white shadow-md rounded p-6">
+          <div className="mb-4">
+            <label className="block text-gray-700 font-semibold mb-2">Name:</label>
+            <input className="w-full px-3 py-2 border rounded" type="text" name="name" value={formData.name} onChange={handleChange} />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 font-semibold mb-2">Email:</label>
+            <input className="w-full px-3 py-2 border rounded" type="email" name="email" value={formData.email} onChange={handleChange} />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 font-semibold mb-2">Role:</label>
+            <select className="w-full px-3 py-2 border rounded" name="role" value={formData.role} onChange={handleChange}>
+              {roles.map((r) => (
+                <option key={r} value={r}>
+                  {r}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 font-semibold mb-2">Password:</label>
+            <input className="w-full px-3 py-2 border rounded" type="password" name="password" value={formData.password} onChange={handleChange} />
+          </div>
+          <button type="submit" className="bg-green-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">New User</button>
+        </form>
+      </div>
     </>
   )
 }

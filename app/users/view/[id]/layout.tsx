@@ -5,9 +5,6 @@ export default function UsersLayout({
 }) {
   return (
     <section>
-      {/* Include shared UI here e.g. a header or sidebar */}
-      <nav>Dashboard nav</nav>
-
       {children}
     </section>
   )

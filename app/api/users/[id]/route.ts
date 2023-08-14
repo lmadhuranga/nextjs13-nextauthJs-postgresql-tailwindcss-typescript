@@ -39,18 +39,18 @@ export async function GET(request: NextRequest, { params: { id } }: { params: { 
 
 
 export async function PUT(request: NextRequest, { params: { id } }: { params: { id: string } }) {
-    const session = await getServerSession(authOptions)
-    console.log(`**************** put session`,session);
-    if(!session) {
-        return NextResponse.json({ user: 'Unauthorized' }, {
-            status: 401,
-        });
-    }
+    // const session = await getServerSession(authOptions)
+    // console.log(`**************** put session`,session?.user?.role, session);
+    // if(!session || session?.user?.role!=='admin') {
+    //     return NextResponse.json({ user: 'Unauthorized' }, {
+    //         status: 401,
+    //     });
+    // }
     
     const userId = parseInt(id, 10);
     try {
         const formData = await request.json();
-        console.log(`--------PUT updatedData`, formData);
+        // console.log(`--------PUT updatedData`, formData);
 
         const existingUser: any = await prisma.user.findUnique({
             where: {

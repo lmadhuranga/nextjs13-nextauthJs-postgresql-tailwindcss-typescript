@@ -66,7 +66,7 @@ export default function Page({ params: { id } }: { params: { id: string } }) {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    // console.log('Form submitted:', formData);
     const updatedUser = await updateUser(id, formData);
     // Todo:: redirect to list page
   };

@@ -2,6 +2,8 @@ import bcrypt from 'bcrypt';
 import { prisma } from '@/lib/prisma';
 import { NextApiRequest } from 'next';
 import { type NextRequest, NextResponse } from 'next/server'
+import { getServerSession } from 'next-auth';
+import { authOptions } from '../auth/[...nextauth]/route';
 
 export async function GET(request: NextRequest) {
     try {
@@ -38,6 +40,14 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
+    const session = await getServerSession(authOptions)
+    // console.log(`**************** put session`,session?.user?.role, session);
+    if(!session || session?.user?.role!=='admin') {
+        return NextResponse.json({ user: 'Unauthorized' }, {
+            status: 401,
+        });
+    }
+
     const { email, password, name, role } = await request.json();
 
     try {

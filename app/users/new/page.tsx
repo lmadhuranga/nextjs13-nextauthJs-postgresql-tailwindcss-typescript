@@ -45,7 +45,7 @@ export default function Page() {
 
   const handleSubmit  = async (e: any) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    // console.log('Form submitted:', formData);
     const user = await newUser(formData);
   };
 

@@ -58,9 +58,9 @@ export default function Page({ searchParams: { page } }: { searchParams: { page:
         <td className="border px-4 py-2">{email}</td>
         <td className="border px-4 py-2">{role}</td>
         <td className="border px-4 py-2">
-          <Link href={`/users/view/${id}`} className="text-blue-500">View</Link> |
-          <Link href={`/users/edit/${id}`} className="text-green-500 ml-2"> Update </Link> |
-          <button onClick={() => onDeleteHandler(id)} className="text-red-500 ml-2">Delete</button>
+          <Link href={`/users/view/${id}`}  className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">View</Link>{' '}
+          <Link href={`/users/edit/${id}`}  className="bg-green-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Update</Link>{' '}
+          <button onClick={() => onDeleteHandler(id)}  className="bg-red-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Delete</button>
         </td>
       </tr>
     );
@@ -70,7 +70,8 @@ export default function Page({ searchParams: { page } }: { searchParams: { page:
     <>
       <div className="p-4">
         <h1 className="text-3xl font-bold underline">User List</h1>
-        <Link href={`/users/new`} className="text-green-500 mb-4 inline-block">New</Link>
+        <br />
+        <Link href={`/users/new`} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">New</Link>
         <table className="table-auto w-full">
           <thead>
             <tr>
